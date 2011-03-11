@@ -18,11 +18,6 @@ SERVICE_CONF=/etc/sysconfig/config/service
 EXEC=/etc/sysconfig/system-script/media_service
 . $SERVICE_CONF
 
-/usr/local/samba/sbin/nmbd >/dev/null 2>&1
-[ $? -eq 0 ] &&\
- /usr/bin/logger "$0 - nmbd deamon Start Succeed" ||\
- /usr/bin/logger "$0 - nmbd deamon Start Failed"
-
 SERVICE="crond smb ftp http btpd"
 for i in $SERVICE; do
  status=`/usr/bin/awk -F= /$i/'{print $2}' ${SERVICE_CONF}`
