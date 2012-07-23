@@ -8,6 +8,7 @@ cron_ntp=/etc/sysconfig/system-script/cron-ntp
 export PATH
 
 service_mount_tmpfs
+service_mount_rootfs
 service_mount_system
 service_syslogd_start
 

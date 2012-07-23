@@ -1,4 +1,4 @@
-service_mount_system(){
+service_mount_rootfs(){
 /bin/dd if=/dev/mtdblock3 of=/dev/ram1 > /dev/null 2>&1
 /bin/mount -t squashfs /dev/ram1 /usr
 [ $? -eq 0 ] || {
@@ -6,7 +6,9 @@ service_mount_system(){
  echo "error_led set" > /proc/mp_leds
  return
  }
+}
 
+service_mount_system(){
 /bin/mount -t jffs2 /dev/mtdblock4 /mnt
 [ $? -eq 0 ] || {
  echo "sys_led clear" > /proc/mp_leds
