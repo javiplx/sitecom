@@ -4,6 +4,7 @@
 
 . /usr/libexec/modules/modules.conf
 PATH=/bin:/sbin:/usr/bin:/usr/sbin
+cron_ntp=/etc/sysconfig/system-script/cron-ntp
 export PATH
 
 service_mount_tmpfs
@@ -33,6 +34,6 @@ service_ntp_start >/dev/null 2>&1 &
  /bin/logger "$0 - Insert USB Kernel Module Failed"
 /sbin/insmod ${KERNEL_PATH}/usblp.ko >/dev/null 2>&1 &
 
-/etc/sysconfig/system-script/cron-ntp >/dev/null 2>&1 &
+${cron_ntp} >/dev/null 2>&1 &
 
 /etc/init.d/rc.services
