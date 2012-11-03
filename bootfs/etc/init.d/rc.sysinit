@@ -12,12 +12,6 @@ service_mount_rootfs
 service_mount_system
 service_syslogd_start
 
-/bin/buttons_daemon
-# mount HDD
-service_mount_hdd
-
-KERNEL_PATH=/usr/lib/modules/2.6.24.4/kernel
-
 service_setcolor
 
 /bin/udevd --daemon
@@ -28,6 +22,8 @@ service_setcolor
 network_start >/dev/null 2>&1
 service_ntp_start >/dev/null 2>&1 &
 
+KERNEL_PATH=/usr/lib/modules/2.6.24.4/kernel
+
 # Load USB kernel modules
 /sbin/insmod ${KERNEL_PATH}/usb-storage.ko >/dev/null 2>&1 &
 [ $? -eq 0 ] &&\
@@ -36,5 +32,9 @@ service_ntp_start >/dev/null 2>&1 &
 /sbin/insmod ${KERNEL_PATH}/usblp.ko >/dev/null 2>&1 &
 
 ${cron_ntp} >/dev/null 2>&1 &
+
+/bin/buttons_daemon
+# mount HDD
+service_mount_hdd
 
 /etc/init.d/rc.services
