@@ -31,15 +31,15 @@ dev=`echo $1|/bin/cut '-d_' -f1`
 echo "${str} blue clear" > /proc/mp_leds
 echo "${str} red set" > /proc/mp_leds
 
-SERVICE="smb ftp btpd lpd"
+SERVICE="smb ftp btpd"
 for service in $SERVICE; do
  service_${service}_stop >/dev/null 2>&1
 done
 dlna_stop_daemon >/dev/null 2>&1 &
 $TwonkyMedia stop
+service_package_manager "Service&stop"
 
 /bin/sleep $SLEEP
-/bin/killall djmount >/dev/null 2>&1
 /bin/killall udevd >/dev/null 2>&1
 /bin/sleep $SLEEP
 
@@ -85,8 +85,6 @@ RAID_MODE=`/usr/bin/mdadm -D /dev/md1`
 
 service_create_single_partition ${dev} >/dev/null 2>&1
 
-/bin/sleep $SLEEP
-/bin/killall djmount >/dev/null 2>&1
 /bin/sleep $SLEEP
 
 /usr/local/xfsprogs/mkfs.xfs -f /dev/${dev}1 >/dev/null 2>&1
@@ -171,8 +169,13 @@ dlna_start_daemon >/dev/null 2>&1 &
 $TwonkyMedia start
 
 /bin/mkdir -p /home/PUBLIC/Media
+/bin/mkdir -p /home/PUBLIC/Packages
+/bin/mkdir -p /home/PUBLIC/.pkg/lib
+/bin/mkdir -p /home/PUBLIC/.pkg/bin
 /bin/chown nobody.nogroup /home/PUBLIC/Media
+/bin/chown nobody.nogroup /home/PUBLIC/Packages
 /bin/chmod 777 /home/PUBLIC/Media
+/bin/chmod 777 /home/PUBLIC/Packages
 
 /bin/udevd --daemon
 /bin/logger "$0 - Drive Format Succeed"
