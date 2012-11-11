@@ -15,3 +15,8 @@ rmdir image
 gzip -9 initrd.img 
 mv initrd.img.gz bootfs.bin
 
+
+# Create squashfs with the dropbear executables
+# Flash is able to fit at least 5012.65 Kbytes (v2.3.33)
+mksquashfs squashfs-root filesystem.bin -noI -no-fragments
+
