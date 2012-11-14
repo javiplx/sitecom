@@ -28,3 +28,9 @@ mv initrd.img.gz bootfs.bin
 # Flash is able to fit at least 5012.65 Kbytes (v2.3.33)
 mksquashfs squashfs-root filesystem.bin -noI -no-fragments
 
+rm -f ${VERSION}.bin
+for file in bootfs.bin filesystem.bin ; do
+   md5sum ${file} > ${file}.md5sum
+   tar -uf ${VERSION}.bin --remove-files ${file} ${file}.md5sum
+   done
+
