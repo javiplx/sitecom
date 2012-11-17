@@ -34,3 +34,6 @@ for file in bootfs.bin filesystem.bin ; do
    tar -uf ${VERSION}.bin --remove-files ${file} ${file}.md5sum
    done
 
+file="uImage"
+test -f ${file}.bin && tar -uf ${VERSION}.bin ${file}.bin ${file}.md5sum
+
