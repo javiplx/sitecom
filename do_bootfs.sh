@@ -1,6 +1,6 @@
 #!/bin/sh 
 
-VERSION="SitecomNas_v2.4.21.1"
+VERSION="SitecomNas_v2.4.21.2"
 
 if [ x${VERSION} = x ] ; then
    echo Set a proper version string
