@@ -1,6 +1,8 @@
 #!/bin/sh 
 
 VERSION=
+FS=
+KERNEL=
 
 if [ x${VERSION} = x ] ; then
    echo Set a proper version string
@@ -24,6 +26,7 @@ gzip -9 initrd.img
 mv initrd.img.gz bootfs.bin
 
 
+if [ x$FS = xYES ] ; then
 # Create squashfs with the dropbear executables
 # Flash is able to fit at least 5012.65 Kbytes (v2.3.33)
 mksquashfs squashfs-root filesystem.bin -noI -no-fragments
@@ -33,7 +36,11 @@ for file in bootfs.bin filesystem.bin ; do
    md5sum ${file} > ${file}.md5sum
    tar -uf ${VERSION}.bin --remove-files ${file} ${file}.md5sum
    done
+fi
 
+
+if [ x$KERNEL = xYES ] ; then
 file="uImage"
 test -f ${file}.bin && tar -uf ${VERSION}.bin ${file}.bin ${file}.md5sum
+fi
 
