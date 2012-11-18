@@ -1,0 +1,16 @@
+service_optware_start(){
+SERVICE_PATH=/etc/sysconfig/config
+SERVICE_CONF=${SERVICE_PATH}/service
+STATUS=`/bin/awk -F= /optware/'{print $2}' ${SERVICE_CONF}|/bin/sed 's/\ //g'`
+
+[ "${STATUS}" == "Enable" ] && {
+ if [ -d /opt/etc/init.d ]; then
+  for f in /opt/etc/init.d/S* ; do
+   [ -x $f ] && $f start
+   [ $? -eq 0 ] &&\
+    /bin/logger "$0 - optware `basename $f` deamon Start Succeed" ||\
+    /bin/logger "$0 - optware `basename $f` deamon Start Failed"
+  done
+ fi
+ }
+}
