@@ -5,8 +5,11 @@ for i in $DNSR_PID; do
  kill -3 $i >/dev/null 2>&1
 done
 
-SERVICE_PATH=/etc/sysconfig/config
+SERVICE_PATH=/tmp
 CONF_FILE=${SERVICE_PATH}/responder.conf
+if [ ! -f ${CONF_FILE} ] ; then
+ cp /etc/sysconfig/config/responder.conf ${SERVICE_PATH}/responder.conf
+ fi
 DISK=`/bin/fdisk -l|/bin/grep "^/dev/sd"`
 HOSTNAME=`/bin/cat /etc/hostname|/bin/sed 's/\ //g'`
 dlna_mDNSR_modify_conf_data > ${CONF_FILE}

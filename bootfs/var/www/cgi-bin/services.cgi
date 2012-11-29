@@ -8,7 +8,7 @@ CONFIG_PATH=/etc/sysconfig/config
 IFCFG=${CONFIG_PATH}/ifcfg-eth0
 
 DAAP_CONF=${CONFIG_PATH}/daapd.conf
-DNSR_CONF=${CONFIG_PATH}/responder.conf
+DNSR_CONF=/tmp/responder.conf
 SERVICE_CONF=${CONFIG_PATH}/service
 CRONTABLE=${CONFIG_PATH}/root
 
