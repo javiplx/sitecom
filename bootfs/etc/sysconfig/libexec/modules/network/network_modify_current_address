@@ -7,7 +7,10 @@ SMB_CONF=${SmbPath}/smb.conf
 SMB_NET_CONF=${SmbPath}/network.inc
 LMHost=${SmbPath}/lmhosts
 
-RESOLV=/etc/resolv.conf
+RESOLV=/tmp/resolv.conf
+if [ ! -f ${RESOLV} ] ; then
+ cp /etc/resolv.conf ${RESOLV}
+ fi
 IFCFG=/etc/sysconfig/config/ifcfg-eth0
 . $IFCFG
 

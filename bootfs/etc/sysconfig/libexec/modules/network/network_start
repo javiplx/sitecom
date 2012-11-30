@@ -1,5 +1,8 @@
 network_start(){
-RESOLV=/etc/resolv.conf
+RESOLV=/tmp/resolv.conf
+if [ ! -f ${RESOLV} ] ; then
+ cp /etc/resolv.conf ${RESOLV}
+ fi
 
 ConfigPath=/etc/sysconfig/config
 SmbPath=${ConfigPath}/smb
