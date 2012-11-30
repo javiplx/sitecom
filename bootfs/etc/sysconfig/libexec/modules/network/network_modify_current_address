@@ -11,7 +11,10 @@ RESOLV=/tmp/resolv.conf
 if [ ! -f ${RESOLV} ] ; then
  cp /etc/resolv.conf ${RESOLV}
  fi
-IFCFG=/etc/sysconfig/config/ifcfg-eth0
+IFCFG=/tmp/ifcfg-eth0
+if [ ! -f ${IFCFG} ] ; then
+  cp /etc/sysconfig/config/ifcfg-eth0 ${IFCFG}
+  fi
 . $IFCFG
 
 NEW_IPADDR=`/bin/ifconfig eth0|/bin/awk '/inet\ addr/{print $2}'|/bin/cut -d ":" -f2`

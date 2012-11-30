@@ -17,8 +17,14 @@ service_mount_system(){
 replaceFile=/bin/replaceFile
 /bin/test -f /mnt/finish || {
  CONF_PATH=/etc/sysconfig/config
- IFCFG=${CONF_PATH}/ifcfg-eth0
- IFCFG_DEFAULT=${CONF_PATH}/ifcfg-eth0.default
+ IFCFG=/tmp/ifcfg-eth0
+ if [ ! -f ${IFCFG} ] ; then
+   cp ${CONF_PATH}/ifcfg-eth0 ${IFCFG}
+   fi
+ IFCFG_DEFAULT=/tmp/ifcfg-eth0.default
+ if [ ! -f ${IFCFG_DEFAULT} ] ; then
+   cp ${CONF_PATH}/ifcfg-eth0.default ${IFCFG_DEFAULT}
+   fi
 
  FILE=`/bin/ls /mnt`
  for i in $FILE; do

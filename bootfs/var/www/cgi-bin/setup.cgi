@@ -7,7 +7,10 @@ echo "<HTML><HEAD><TITLE>Sample CGI Output</TITLE></HEAD><BODY>"
 DHCP_TMP=/etc/sysconfig/system-script/udhcpd.tmp
 
 CONFIG_PATH=/etc/sysconfig/config
-IFCFG=${CONFIG_PATH}/ifcfg-eth0
+IFCFG=/tmp/ifcfg-eth0
+if [ ! -f ${IFCFG} ] ; then
+  cp ${CONFIG_PATH}/ifcfg-eth0 ${IFCFG}
+  fi
 GMT=${CONFIG_PATH}/gmt.conf
 TZINFO=${CONFIG_PATH}/tzinfo
 NTP_CONF=${CONFIG_PATH}/ntp.conf

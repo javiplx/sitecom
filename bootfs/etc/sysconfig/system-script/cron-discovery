@@ -3,7 +3,10 @@
 DISCOVERY=/bin/discovery
 SMB_HOST_CONF=/etc/sysconfig/config/smb/host.inc
 VERSION=/etc/sysconfig/config/version
-IFCFG=/etc/sysconfig/config/ifcfg-eth0
+IFCFG=/tmp/ifcfg-eth0
+if [ ! -f ${IFCFG} ] ; then
+  cp /etc/sysconfig/config/ifcfg-eth0 ${IFCFG}
+  fi
 CONF_FILE=/tmp/responder.conf
 if [ ! -f ${CONF_FILE} ] ; then
  cp /etc/sysconfig/config/responder.conf ${CONF_FILE}

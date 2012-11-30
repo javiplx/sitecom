@@ -1,7 +1,10 @@
 dlna_mDNSR_modify_conf_data(){
 SERVICE_PATH=/etc/sysconfig/config
 SERVICE_CONF=$SERVICE_PATH/service
-IFCFG=/etc/sysconfig/network-scripts/ifcfg-eth0
+IFCFG=/tmp/ifcfg-eth0
+if [ ! -f ${IFCFG} ] ; then
+  cp /etc/sysconfig/network-scripts/ifcfg-eth0 ${IFCFG}
+  fi
 . $SERVICE_CONF
 
 echo "\"$HOSTNAME\" _http._tcp local. 80"

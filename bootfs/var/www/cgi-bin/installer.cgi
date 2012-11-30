@@ -8,8 +8,14 @@ PASSWD=/etc/passwd
 CONF_PATH=/etc/sysconfig/config
 SMB_SHARES_CONF=${CONF_PATH}/smb/shares.inc
 SMB_HOST_CONF=${CONF_PATH}/smb/host.inc
-IFCFG=${CONF_PATH}/ifcfg-eth0
-IFCFG_DEFAULT=${CONF_PATH}/ifcfg-eth0.default
+IFCFG=/tmp/ifcfg-eth0
+if [ ! -f ${IFCFG} ] ; then
+  cp ${CONF_PATH}/ifcfg-eth0 ${IFCFG}
+  fi
+IFCFG_DEFAULT=/tmp/ifcfg-eth0.default
+if [ ! -f ${IFCFG_DEFAULT} ] ; then
+  cp ${CONF_PATH}/ifcfg-eth0.default ${IFCFG_DEFAULT}
+  fi
 replaceFile=/bin/replaceFile
 
 scsi_list=/etc/sysconfig/config/scsi.list

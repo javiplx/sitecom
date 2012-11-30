@@ -5,7 +5,10 @@ echo "<HTML><HEAD><TITLE>Sample CGI Output</TITLE></HEAD><BODY>"
 
 . /usr/libexec/modules/modules.conf
 SMB_HOST_CONF=/etc/sysconfig/config/smb/host.inc
-IFCFG=/etc/sysconfig/network-scripts/ifcfg-eth0
+IFCFG=/tmp/ifcfg-eth0
+if [ ! -f ${IFCFG} ] ; then
+  cp /etc/sysconfig/network-scripts/ifcfg-eth0 ${IFCFG}
+  fi
 VERSION=/etc/sysconfig/config/version
 
 replaceFile=/var/www/cgi-bin/replaceFile
