@@ -1,6 +1,6 @@
 #system variables
-export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/install/bin:/opt/bin:/opt/local/bin
-export LD_LIBRARY_PATH=/opt/lib
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/install/bin:/opt/sbin:/opt/bin:/opt/local/bin
+export LD_LIBRARY_PATH=/opt/lib:/opt/local/lib
 export TERM=vt100
 
 set -o ignoreeof
