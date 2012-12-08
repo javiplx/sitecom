@@ -29,8 +29,8 @@ function handleResponse(http,div_id,type) {
 	//alert(response);
 
     if(type != "html"){
-        start = response.indexOf("<BODY>")+7;
-        end = response.indexOf("</BODY>");
+        var start = response.indexOf("<BODY>")+7;
+        var end = response.indexOf("</BODY>");
         response = response.substr(start,end-start);
     }
    //alert(response);
@@ -59,7 +59,7 @@ function getContent(div_id,url,type,async){
 	//alert(http);
 	var t = new Date().getTime();
 	//var url = 'cgi-bin/' + fid + "&" + t;
-	var url = url + "&" + t;
+	var url = url + "&" + getCookie('uid') + "&" + getCookie('sum') + "&" + t;
 	//alert(url);
 
 	if(async=='undefined' || async==null)
@@ -455,4 +455,25 @@ function sz(el, p) {
 
 })(jQuery);
 
+// 取消login 改為 web server authentication
+function recheckAccount(need_return) {
+	if(need_return==true)
+		return "OK,uid,sum";
+}
+function recheckAccount(need_return) {
+	var uid = getCookie('uid');
+	var sum = getCookie('sum');
+	var agent = getCookie('agent');
+	var verify = getContent("","/cgi-bin/setup.cgi?recheckaccount&"+uid+"&"+sum+"&"+agent,"return",false);
 
+	msg = verify.split("\n");
+	if(need_return==true){
+		return verify;
+	}else if(msg[0]=="OK"){
+		document.cookie="uid="+msg[1]+";";
+		document.cookie="sum="+msg[2]+";";
+	}else{
+		if(msg[0]!="OK")
+			location.replace ('login.htm');
+	}
+}
