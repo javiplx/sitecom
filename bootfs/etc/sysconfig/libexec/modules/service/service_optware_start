@@ -6,8 +6,8 @@ STATUS=`/bin/awk -F= /optware/'{print $2}' ${SERVICE_CONF}|/bin/sed 's/\ //g'`
 [ "${STATUS}" == "Enable" ] && {
  if [ -d /opt/etc/init.d ]; then
   # /etc/profile is not sourced at this point
-  export PATH=$PATH:/opt/sbin:/opt/bin
-  export LD_LIBRARY_PATH=/opt/lib
+  export PATH=$PATH:/opt/sbin:/opt/bin:/opt/local/bin
+  export LD_LIBRARY_PATH=/opt/lib:/opt/local/lib
   for f in /opt/etc/init.d/S* ; do
    [ -x $f ] && $f start
    [ $? -eq 0 ] &&\
